@@ -1,5 +1,6 @@
 package com.wellsfargo.counselor.entity;
 
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,18 +10,38 @@ public class Portfolio {
     @GeneratedValue()
     private long portfolioId;
 
-    // Add other attributes specific to the Portfolio entity as needed
-
-    @OneToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @ManyToOne
     private Client client;
 
+    @Column(nullable = false)
+    private String creationDate;
+
     protected Portfolio() {
+
     }
 
-    public Portfolio(Client client) {
+    public Portfolio(Client client, String creationDate) {
+        this.client = client;
+        this.creationDate = creationDate;
+    }
+
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
+
+    public Client getCLient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
         this.client = client;
     }
 
-    // Add getters and setters as required
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 }
